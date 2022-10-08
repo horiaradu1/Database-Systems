@@ -1,0 +1,85 @@
+Personnel (personnel_ID, facilityName, name, dateOfBirth, age, first_name, last_name):
+    pk[personnel_ID]
+    fk[facilityName -> Facility.facilityName]
+
+Email (emailAddress, personnel_ID):
+    fk[personnel_ID]
+
+Managers (manager_ID, militaryRank):
+    pk[manager_ID]
+    fk[manager_ID -> Personnel.personnel_ID]
+
+HR (HR_ID, jobTitle):
+    pk[HR_ID]
+    fk[HR_ID -> Personnel.personnel_ID]
+
+Astronauts (astronauts_ID, numberOfMissions):
+    pk[astronauts_ID]
+    fk[astronauts_ID -> Personnel.personnel_ID]
+
+Department (department_name, manager_ID, function):
+    pk[department_name]
+    fk[manager_ID -> Managers.manager_ID]
+
+Pilots (pilot_ID, flyingHours):
+    pk[pilot_ID]
+    fk[pilot_ID  -> Astronauts.astronauts_ID]
+
+Commanders (commander_ID, numberOfMissions):
+    pk[commander_ID]
+    fk[commander_ID  -> Astronauts.astronauts_ID]
+
+Engineers (engineer_ID, speciality):
+    pk[engineer_ID]
+    fk[engineer_ID -> Astronauts.astronauts_ID]
+
+Missions (missionName, astronauts_ID, destination, launchDate, crewSize):
+    pk[missionName]
+    fk[astronauts_ID -> Astronauts.astronauts_ID]
+
+Target (target_ID, missionName, name, dateOfFirstMission, typeOfTarget, numberOfMissions):
+    pk[target_ID]
+    fk[missionName -> Missions.missionName]
+
+Vehicles (vehicles_ID, missionName, name):
+    pk[vehicles_ID]
+    fk[missionName -> Mission.missionName]
+
+Land (landV_ID, wheelType):
+    pk[landV_ID]
+    fk[landV_ID -> Vehicles.vehicles_ID]
+
+Space (spaceV_ID, serviceDate, firstLaunch, numberOfMissions, mostRecentLaunch, active):
+    pk[spaceV_ID]
+    fk[spaceV_ID -> Vehicles.vehicles_ID]
+
+Air (airV_ID, engineType):
+    pk[airV_ID]
+    fk[airV_ID -> Vehicles.vehicles_ID]
+
+Parts (partNumber, vehicles_ID):
+    pk[partNumber]
+    fk[vehicles_ID -> Vehicles.vehicles_ID]
+
+Suppliers (supplierName, partNumber):
+    pk[supplierName]
+    fk[partNumber -> Parts.partNumber]
+
+Facility (facilityName, state, mainOperation):
+    pk[facilityName]
+
+Building (buildingName, facilityName, type, openingDate):
+    pk[buildingName]
+    fk[facilityName -> Facility.facilityName]
+
+Server (serverName):
+    pk[serverName]
+    fk[facilityName -> Facility.facilityName]
+
+Mission_Reports (report_ID, serverName, missionDate, details):
+    pk[report_ID]
+    fk[serverName -> Server.serverName]
+
+Bank_Statements (statement_ID, serverName, statementDate, amount, summary):
+    pk[statement_ID]
+    fk[serverName -> Server.serverName]
